@@ -1,15 +1,15 @@
-import request
+import requests
 import random
 
 def obten_preguntas():
     url = "https://opentdb.com/api.php?amount=15&category=15&difficulty=easy&type=multiple"
-    respuesta = request.get(url)
+    respuesta = requests.get(url)
     datos = respuesta.json()
     return datos["results"]
 
 def mostrar_pregunta(pregunta, numero):
     print(f"\nPregunta {numero}: {pregunta["question"]}")
-    opciones = pregunta["incorrect_answer"] + [pregunta["corret_answer"]]
+    opciones = pregunta["incorrect_answers"] + [pregunta["correct_answer"]]
     random.shuffle(opciones)
     for i, opciones in enumerate(opciones, 1):
         print(f"{i}. {opciones}")
@@ -22,14 +22,14 @@ def iniciar_juego():
     puntos = 0
     comodin_usado = False
 
-    for i, pregunta in enumerate(pregunta, 1):
+    for i, pregunta in enumerate(preguntas, 1):
         print(f"\nPuntos actuales: {puntos}")
         decision = input("¿Desea continuar o plantarte? c/p: ").lower()
         if decision == "p":
             print(f"Te has plantado con {puntos} puntos. ¡Gracias por Jugar!")
             return
         if not comodin_usado:
-            usar_comodin == input("¿Deseas usar tu comodín para saltar esta pregunta? (s/n): ").lower()
+            usar_comodin = input("¿Deseas usar tu comodín para saltar esta pregunta? (s/n): ").lower()
             if usar_comodin == "s":
                 comodin_usado = True
                 print("Comodín usado. Saltar pregunta ...")
