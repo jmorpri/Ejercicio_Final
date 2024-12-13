@@ -11,12 +11,13 @@ def mostrar_pregunta(pregunta, numero):
     print(f"\nPregunta {numero}: {pregunta["question"]}")
     opciones = pregunta["incorrect_answers"] + [pregunta["correct_answer"]]
     random.shuffle(opciones)
-    for i, opciones in enumerate(opciones, 1):
-        print(f"{i}. {opciones}")
+    for i, opcion in enumerate(opciones, 1):
+        print(f"{i}. {opcion}")
     return opciones
 
 def iniciar_juego():
     nombre = input("Bienvenido a ¿Quién quiere ser millonario Cual es tu Nombre:")
+    print(f"\n!Hola, {nombre}¡ !Buena Suerte¡\n")
 
     preguntas = obten_preguntas()
     puntos = 0
